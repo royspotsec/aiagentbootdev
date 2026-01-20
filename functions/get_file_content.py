@@ -1,5 +1,8 @@
 import sys, os
 from config import MAX_CHARS
+from google.genai import types
+
+
 def get_file_content(working_directory, file_path):
     try:
         abspath = os.path.abspath(working_directory)
@@ -25,7 +28,24 @@ def get_file_content(working_directory, file_path):
 
 
 
-
+schema_get_file_content = types.FunctionDeclaration(
+            
+            
+            name="get_file_content",
+            description="get files content in a specified directory relative to the working directory, providing file contetn",
+            parameters=types.Schema(
+                required=["file_path"],
+                type=types.Type.OBJECT,
+                properties={
+                    
+                    "file_path": types.Schema(
+                        type=types.Type.STRING,
+                        description="its the file path",
+                    ),
+                    
+                },
+            ),
+        )
 #os.path.abspath(): Get an absolute path from a relative path
 # os.path.join(): Join two paths together safely (handles slashes)
 # os.path.normpath(): Normalize a path (handles things like ..)
